@@ -3,33 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500&family=Monoton&display=swap" rel="stylesheet">
-<style>
-body{
-  background:#E5D8BD;
-  font-family:'Rubik',sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  margin:0;
-}
-.card{
-  background:white;
-  padding:40px;
-  border-radius:16px;
-  border:2px solid #3A2E2E;
-  text-align:center;
-  max-width:420px;
-}
-h1{font-family:'Monoton';color:#C60000;}
-</style>
+<title>Gracias</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="card">
-  <h1>Pago recibido</h1>
-  <p>Hemos recibido tu solicitud correctamente.</p>
-  <p>Tu pago será validado y recibirás tus números por correo.</p>
+
+<div id="app">
+  <div class="screen active">
+    <h1 class="title">¡Gracias!</h1>
+    <p class="subtitle">Hemos recibido tu reserva correctamente.</p>
+    <div class="btn" onclick="location.href='index.html'">
+      Volver al inicio
+    </div>
+  </div>
 </div>
+
 </body>
 </html>

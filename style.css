@@ -1,0 +1,346 @@
+<style>
+
+/* =========================
+    BASE GENERAL
+========================= */
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: #E5D8BD;
+    font-family: 'Rubik', sans-serif;
+    color: #3A2E2E;
+}
+
+#app {
+    max-width: 480px;
+    margin: auto;
+    padding: 0;
+}
+
+/* =========================
+    PANTALLAS
+========================= */
+.terms-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 16px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.terms-check input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #C60000; /* rojo de tu marca */
+    cursor: pointer;
+}
+
+.terms-check input[type="checkbox"]:checked {
+    transform: scale(1.05);
+    transition: transform 0.15s ease;
+}
+
+.terms-check label {
+    cursor: pointer;
+    user-select: none;
+}
+
+.screen {
+    display: none;
+    opacity: 0;
+    transition: opacity .35s ease-in-out;
+    padding: 28px;
+    position: relative;
+}
+
+.active {
+    display: block;
+    opacity: 1;
+}
+
+/* =========================
+    TITULOS
+========================= */
+
+.title {
+    font-family: 'Monoton';
+    font-size: 32px;
+    color: #C60000;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-family: 'Monoton';
+    font-size: 22px;
+    color: #6A7A8A;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* MÓVIL — reducir títulos */
+@media(max-width:430px){
+    .title { font-size: 26px; }
+    .subtitle { font-size: 18px; }
+}
+
+/* =========================
+    BOTÓN PRINCIPAL
+========================= */
+
+.btn {
+    width: 100%;
+    background: #3A2E2E;
+    color: white;
+    padding: 16px;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 25px;
+    border: none;
+    transition: 0.15s;
+}
+
+.btn{
+    transition: 
+        transform .25s ease,
+        box-shadow .25s ease,
+        background .25s ease,
+        opacity .25s ease;
+}
+
+.btn.active{
+    background: #3A2E2E;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+    animation: enablePop .35s ease;
+}
+
+@keyframes enablePop{
+    0%   { transform: scale(.96); }
+    60%  { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+.btn:active { transform: scale(0.97); }
+.disabled { opacity: .35; pointer-events: none; }
+
+/* =========================
+    BOTÓN VOLVER
+========================= */
+
+.back {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #6A7A8A;
+    color: white;
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: 2px solid #3A2E2E;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .15s;
+}
+.back:active { transform: scale(.96); }
+
+/* =========================
+    ACORDEÓN TÉRMINOS
+========================= */
+
+.accordion {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    border: 2px solid #3A2E2E;
+    cursor: pointer;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.panel {
+    display: none;
+    background: #EFE7D2;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid #3A2E2E;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+/* =========================
+    COUNTER
+========================= */
+
+.counterRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 25px;
+}
+
+.counterBtn, .resetBtn {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    border: 2px solid #3A2E2E;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.counterBtn { background: #C60000; color:white; }
+.resetBtn  { background: #4A6072; color:white; font-size: 22px; }
+
+.counterBtn:active, .resetBtn:active { transform: scale(.95); }
+
+.counterNum {
+    font-family: "Monoton";
+    font-size: 46px;
+    width: 80px;
+    text-align: center;
+    color: #C60000;
+}
+
+/* =========================
+    MÉTODO DE PAGO
+========================= */
+
+.payCard {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    border: 2px solid #3A2E2E;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.payCard:hover { transform: scale(1.02); }
+
+.selected {
+    background: #EFE7D2;
+    border-color: #C60000;
+}
+
+.payIcon {
+    width: 62px;
+    height: 62px;
+    background: #C60000;
+    color: white;
+    border-radius: 12px;
+    border: 2px solid #3A2E2E;
+    font-family: 'Monoton';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+/* =========================
+    BOTÓN COPIAR
+========================= */
+
+.copyBtn {
+    background: #6A7A8A;
+    padding: 14px;
+    border-radius: 12px;
+    border: 2px solid #3A2E2E;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.copyBtn:active { transform: scale(.97); }
+
+/* =========================
+    FACTURA
+========================= */
+
+.factura {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #3A2E2E;
+    margin-bottom: 20px;
+}
+
+.factura {
+    background: #FFFFFF;
+    padding: 22px;
+    border-radius: 14px;
+    border: 2px solid #3A2E2E;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 0 #3A2E2E;
+}
+
+.factLine {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 1px dashed #CBBFA5;
+}
+
+.factLine:last-child {
+    border-bottom: none;
+}
+
+.factLine span:first-child {
+    font-weight: 600;
+    color: #6A7A8A;
+}
+
+.factLine span:last-child {
+    font-weight: 700;
+}
+
+.factLine {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    margin-bottom: 12px;
+}
+
+/* =========================
+    FORMULARIO
+========================= */
+
+label { font-weight: 600; margin-bottom: 6px; display: block; }
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 2px solid #3A2E2E;
+    margin-bottom: 15px;
+    font-size: 16px;
+}
+
+input[readonly] {
+    background: #EFE7D2;
+    font-weight: 600;
+}
+
+.invalid {
+    border-color: #C60000;
+    background: #FBEAEA;
+}
+
+</style>
