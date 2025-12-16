@@ -69,21 +69,18 @@ function updateTotals(){
 function add(){
     count++;
     updateTotals();
-    updateNumbersLimit();
 }
 
 function subtract(){
     if(count > 3){
         count--;
         updateTotals();
-        updateNumbersLimit();
     }
 }
 
 function resetCount(){
     count = 3;
     updateTotals();
-    updateNumbersLimit();
 }
 
 function selectPay(name, id){
@@ -156,4 +153,5 @@ function generateOrderID(){
 
     return `${prefix}-${y}${m}${d}-${rnd}`;
 }
+
 
