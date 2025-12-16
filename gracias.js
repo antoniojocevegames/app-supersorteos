@@ -3,7 +3,6 @@ const { jsPDF } = window.jspdf;
 // Recuperar datos
 const orderID = localStorage.getItem("orderID");
 const metodo  = localStorage.getItem("metodo");
-const numeros = localStorage.getItem("numeros");
 const total   = localStorage.getItem("total");
 
 document.getElementById("order").innerText  = orderID || "-";
@@ -21,7 +20,6 @@ function generatePDF(){
     pdf.setFontSize(12);
     pdf.text(`Order ID: ${orderID}`, 20, 40);
     pdf.text(`Método de pago: ${metodo}`, 20, 50);
-    pdf.text(`Números: ${numeros}`, 20, 60);
     pdf.text(`Total: ${total}`, 20, 70);
 
     pdf.text("Gracias por tu compra.", 20, 95);
@@ -30,3 +28,4 @@ function generatePDF(){
 }
 
 localStorage.clear();
+
