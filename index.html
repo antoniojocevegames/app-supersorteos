@@ -97,13 +97,7 @@
         <div class="counterNum" id="count">3</div>
         <div class="counterBtn" onclick="add()">+</div>
     </div>
-
-    <label style="margin-top:20px;">Números deseados</label>
-    
-    <input type="text" id="numsInput" placeholder="Ej: 00010203" oninput="handleNumbersInput(this)">
-
-    <label style="margin-top:20px;">(Si dejas la casilla en blanco el sistema lo tomara como ´Al azar´)</label>
-
+     
     <h2 class="subtitle" id="totals"></h2>
 
     <div class="btn" onclick="go(3)">ESCOGER MÉTODO DE PAGO</div>
@@ -183,7 +177,6 @@
         <div class="factLine"><span>Tickets:</span><span id="rCant"></span></div>
         <div class="factLine"><span>Total USD:</span><span id="rUsd"></span></div>
         <div class="factLine"><span>Total Bs:</span><span id="rBs"></span></div>
-        <div class="factLine"><span>Números:</span><span id="rNums"></span></div>
     </div>
 
     <div class="btn" onclick="fillFormData(); go(5)">CONTINUAR</div>
@@ -211,10 +204,7 @@
 
         <label>Correo electrónico</label>
         <input type="email" name="email" required>
-
-        <label>Números</label>
-        <input type="text" id="formNums" name="Numeros" readonly>
-
+         
         <label>Cantidad</label>
         <input type="text" id="formCant" name="Tickets" readonly>
 
@@ -263,6 +253,7 @@
 
 </body>
 </html>
+
 
 
 
