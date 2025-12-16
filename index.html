@@ -10,8 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=Monoton&display=swap" rel="stylesheet">
 
 <!-- CSS -->
-<link rel="stylesheet" href="style.css">
-
+<link rel="stylesheet" href="C:\Users\anton\Documents\Proyectos\supersorteos/style.css">
 </head>
 
 <body>
@@ -99,10 +98,13 @@
         <div class="counterBtn" onclick="add()">+</div>
     </div>
 
-    <label style="margin-top:20px;">Números deseados (opcional)</label>
-    <input type="text" id="numsInput" placeholder="Ej: 00010203" oninput="formatNums(this)">
+    <label style="margin-top:20px;">Números deseados</label>
+    
+    <input type="text" id="numsInput" placeholder="Ej: 00010203" oninput="handleNumbersInput(this)">
 
-    <h2 class="subtitle" id="totals">Total: 3 USD | 300 Bs</h2>
+    <label style="margin-top:20px;">(Si dejas la casilla en blanco el sistema lo tomara como ´Al azar´)</label>
+
+    <h2 class="subtitle" id="totals"></h2>
 
     <div class="btn" onclick="go(3)">ESCOGER MÉTODO DE PAGO</div>
 </div>
@@ -118,27 +120,50 @@
 
     <div id="pagoM" class="payCard" onclick="selectPay('Pago Móvil','pagoM')">
         <div class="payIcon">P</div>
-        <div><b>Pago Móvil</b><br>BBVA – 0102<br>Tel: 643107865<br>RIF: Z2035460B</div>
+        <div>
+            <b>Pago Móvil</b><br>
+            0102<br>
+            04121865493<br>
+            8434806
+        </div>
     </div>
 
     <div id="zelle" class="payCard" onclick="selectPay('Zelle','zelle')">
         <div class="payIcon">Z</div>
-        <div><b>Zelle</b><br>antoniojosecedenoveliz@gmail.com</div>
+        <div>
+            <b>Zelle</b><br>
+            9296030084
+        </div>
     </div>
 
     <div id="binance" class="payCard" onclick="selectPay('Binance','binance')">
         <div class="payIcon">B</div>
-        <div><b>Binance Pay</b><br>ID: antoniojoceve</div>
+        <div>
+            <b>Binance Pay</b><br>
+            antonyceden@gmail.com
+        </div>
     </div>
 
     <div id="paypal" class="payCard" onclick="selectPay('PayPal','paypal')">
         <div class="payIcon">PP</div>
-        <div><b>PayPal</b><br>antoniofebrero24@gmail.com</div>
+        <div>
+            <b>PayPal</b><br>
+            luisdioanacordovagomez@gmail.com
+        </div>
+    </div>
+
+    <!-- ✅ CASH APP (ESTA ES LA QUE NO APARECÍA) -->
+    <div id="cashapp" class="payCard" onclick="selectPay('Cash App','cashapp')">
+        <div class="payIcon">C</div>
+        <div>
+            <b>Cash App</b><br>
+            luisdioanacordovagomez@gmail.com
+        </div>
     </div>
 
     <div class="copyBtn" onclick="copyData()">COPIAR DATOS</div>
 
-    <h2 class="subtitle" id="payTotals">Total: 3 USD | 300 Bs</h2>
+    <h2 class="subtitle" id="payTotals"></h2>
 
     <div class="btn" onclick="validatePay()">CONTINUAR</div>
 </div>
@@ -173,7 +198,7 @@
 
     <h1 class="title">Confirmar Pago</h1>
 
-    <form action="https://formsubmit.co/antoniojoceve@gmail.com" method="POST" enctype="multipart/form-data">
+    <form action="https://formsubmit.co/cordovaosmiller8@gmail.com" method="POST" enctype="multipart/form-data">
 
         <label>Order ID</label>
         <input type="text" id="formOrder" name="Order_ID" readonly>
@@ -213,7 +238,17 @@
 
         <button class="btn" type="submit">CONFIRMAR COMPRA</button>
 
-        <input type="hidden" name="_subject" value="Nueva Reserva Super Sorteos">
+        <input type="hidden" name="_subject" value="Nueva orden recibida - Super Sorteos">
+        <input type="hidden" name="_autoresponse" 
+            value="Gracias por tu orden en Super Sorteos.
+
+            Hemos recibido correctamente tu solicitud de compra.
+
+            En las próximas horas verificaremos el pago y te enviaremos la confirmación de tus números.
+
+            Por favor conserva tu Order ID para cualquier consulta.
+
+            Equipo Super Sorteos.">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_next" value="https://antoniojocevegames.github.io/app-supersorteos/gracias.html">
@@ -223,9 +258,7 @@
 </div>
 
 <!-- JS -->
-<script src="app.js"></script>
+<script src="C:\Users\anton\Documents\Proyectos\supersorteos/app.js" defer></script>
 
 </body>
 </html>
-
-

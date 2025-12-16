@@ -3,6 +3,31 @@ let method = "";
 let copyTxt = "";
 let selectedNumbers = "";
 let orderID = "";
+const PRICE_USD = 1;
+const RATE_BS = 320; // ⬅️ SOLO CAMBIAS ESTO CADA SEMANA
+
+const paymentMethods = {
+    "Pago Móvil": {
+        label: "Pago Móvil",
+        copy: `0102 8434806 04121865493`
+    },
+    "Zelle": {
+        label: "Zelle",
+        copy: `9296030084`
+    },
+    "Binance": {
+        label: "Binance Pay",
+        copy: `antonyceden@gmail.com`
+    },
+    "PayPal": {
+        label: "PayPal",
+        copy: `luisdioanacordovagomez@gmail.com`
+    },
+    "Cash App": {
+        label: "Cash App",
+        copy: `luisdioanacordovagomez@gmail.com`
+    }
+}
 
 function go(n){
     document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -30,34 +55,111 @@ function validateTerms(){
 }
 
 function updateTotals(){
+    const usd = count * PRICE_USD;
+    const bs  = count * RATE_BS;
+
     document.getElementById("count").innerText = count;
-    document.getElementById("totals").innerText = `Total: ${count} USD | ${count*100} Bs`;
-    document.getElementById("payTotals").innerText = `Total: ${count} USD | ${count*100} Bs`;
+
+    document.getElementById("totals").innerText =
+        `Total: ${usd} USD | ${bs} Bs`;
+
+    document.getElementById("payTotals").innerText =
+        `Total: ${usd} USD | ${bs} Bs`;
 }
 
-function add(){ count++; updateTotals(); }
-function subtract(){ if(count > 3){ count--; updateTotals(); } }
-function resetCount(){ count = 3; updateTotals(); }
+function add(){
+    count++;
+    updateTotals();
+    updateNumbersLimit();
+}
 
-function formatNums(input){
-    let raw = input.value.replace(/\D/g,"");
+function subtract(){
+    if(count > 3){
+        count--;
+        updateTotals();
+        updateNumbersLimit();
+    }
+}
+
+function resetCount(){
+    count = 3;
+    updateTotals();
+    updateNumbersLimit();
+}
+
+
+function handleNumbersInput(input){
+    const maxDigits = count * 4;
+
+    // 🔒 bloquear físicamente el input
+    input.maxLength = maxDigits + Math.floor(maxDigits / 4);
+
+    // solo números
+    let raw = input.value.replace(/\D/g, "");
+
+    // cortar de verdad
+    if(raw.length > maxDigits){
+        raw = raw.slice(0, maxDigits);
+    }
+
     selectedNumbers = raw;
-    input.value = raw.replace(/(.{4})/g,"$1 ").trim();
+
+    // formato visual 4 en 4
+    input.value = raw.replace(/(.{4})/g, "$1 ").trim();
 }
 
-function selectPay(name,id){
+function updateNumbersLimit(){
+    const input = document.getElementById("numsInput");
+    if(!input) return;
+    handleNumbersInput(input);
+}
+
+function trimNumbersToLimit(){
+    const input = document.getElementById("numsInput");
+    if(!input) return;
+
+    const maxDigits = count * 4;
+
+    let raw = selectedNumbers.replace(/\D/g,"");
+
+    if(raw.length > maxDigits){
+        raw = raw.slice(0, maxDigits);
+    }
+
+    selectedNumbers = raw;
+    input.value = raw.replace(/(.{4})/g, "$1 ").trim();
+}
+
+function buildNumbersDisplay(){
+    const blocks = [];
+    const maxBlocks = count;
+    const raw = selectedNumbers || "";
+
+    for(let i = 0; i < maxBlocks; i++){
+        const chunk = raw.slice(i*4, i*4 + 4);
+        if(chunk.length === 4){
+            blocks.push(chunk);
+        } else {
+            blocks.push("Al azar");
+        }
+    }
+
+    return blocks.join(" | ");
+}
+
+function selectPay(name, id){
     method = name;
-    document.querySelectorAll(".payCard").forEach(c => c.classList.remove("selected"));
+
+    document.querySelectorAll(".payCard")
+        .forEach(c => c.classList.remove("selected"));
+
     document.getElementById(id).classList.add("selected");
 
-    if(name==="Pago Móvil")
-        copyTxt="Banco BBVA\nTel: 643107865\nRIF: Z2035460B\nCódigo: 0102";
-    if(name==="Zelle")
-        copyTxt="Zelle:\nantoniojosecedenoveliz@gmail.com";
-    if(name==="Binance")
-        copyTxt="Binance Pay ID:\nantoniojoceve";
-    if(name==="PayPal")
-        copyTxt="PayPal:\nantoniofebrero24@gmail.com";
+    if(paymentMethods[name]){
+        copyTxt = paymentMethods[name].copy;
+    } else {
+        copyTxt = "";
+    }
 }
 
 function copyData(){
@@ -76,9 +178,9 @@ function validatePay(){
 
     document.getElementById("rMetodo").innerText = method;
     document.getElementById("rCant").innerText = count;
-    document.getElementById("rUsd").innerText = count+" USD";
-    document.getElementById("rBs").innerText = (count*100)+" Bs";
-    document.getElementById("rNums").innerText = selectedNumbers ? selectedNumbers.replace(/(.{4})/g,"$1 ").trim() : "Al azar";
+    document.getElementById("rUsd").innerText = (count * PRICE_USD) + " USD";
+    document.getElementById("rBs").innerText  = (count * RATE_BS) + " Bs";    
+    document.getElementById("rNums").innerText = buildNumbersDisplay();
 
     go(4);
 }
@@ -92,17 +194,14 @@ function fillFormData(){
 
     document.getElementById("formOrder").value = orderID;
     document.getElementById("formCant").value = count;
-    document.getElementById("formUsd").value = count + " USD";
-    document.getElementById("formBs").value = (count * 100) + " Bs";
+    document.getElementById("formUsd").value = (count * PRICE_USD) + " USD";
+    document.getElementById("formBs").value  = (count * RATE_BS) + " Bs";
     document.getElementById("formMetodo").value = method;
-    document.getElementById("formNums").value =
-        selectedNumbers
-        ? selectedNumbers.replace(/(.{4})/g,"$1 ").trim()
-        : "Al azar";
+    document.getElementById("formNums").value = buildNumbersDisplay();
+
 }
 
 // ---- ORDEN ID 
-// 
 // - GENERADOR DE CODIGO
 function generateOrderID(){
     const prefix = "SS";
