@@ -3,21 +3,60 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gracias</title>
+
+<title>Gracias | Super Sorteos</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=Monoton&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
+
 <body>
 
 <div id="app">
+
   <div class="screen active">
-    <h1 class="title">¡Gracias!</h1>
-    <p class="subtitle">Hemos recibido tu reserva correctamente.</p>
-    <div class="btn" onclick="location.href='index.html'">
+
+    <h1 class="title">¡GRACIAS!</h1>
+    <p class="subtitle">Tu orden fue recibida correctamente</p>
+
+    <div class="factura">
+
+      <div class="factLine">
+        <span>Order ID</span>
+        <span id="order"></span>
+      </div>
+
+      <div class="factLine">
+        <span>Método de pago</span>
+        <span id="metodo"></span>
+      </div>
+
+      <div class="factLine">
+        <span>Números</span>
+        <span id="nums"></span>
+      </div>
+
+      <div class="factLine">
+        <span>Total</span>
+        <span id="total"></span>
+      </div>
+
+    </div>
+
+    <div class="btn" onclick="generatePDF()">
+      Descargar factura (PDF)
+    </div>
+
+    <div class="btn" style="margin-top:15px;" onclick="window.location.href='index.html'">
       Volver al inicio
     </div>
+
   </div>
+
 </div>
 
+<script src="gracias.js"></script>
 </body>
 </html>
-
