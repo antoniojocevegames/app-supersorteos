@@ -135,7 +135,6 @@ function fillFormData(){
     localStorage.setItem("orderID", orderID);
     localStorage.setItem("metodo", method);
     localStorage.setItem("total", `${count * PRICE_USD} USD | ${count * RATE_BS} Bs`);
-    localStorage.setItem("tickets", count);
 
 }
 
@@ -153,5 +152,6 @@ function generateOrderID(){
 
     return `${prefix}-${y}${m}${d}-${rnd}`;
 }
+
 
 
