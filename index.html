@@ -191,9 +191,12 @@
 
     <h1 class="title">Confirmar Pago</h1>
 
-    <form action="https://script.google.com/macros/s/AKfycbxDDcF2usj59c-rg0OzXa6V99n4Oh_hEQvhcv2skgphMxt9_95EMtB1942aqgNAf5XoyQ/exec"
-        method="POST"
-        target="_self">
+    <form 
+    id="orderForm"
+    action="https://script.google.com/macros/s/TU_ID/exec"
+    method="POST"
+    enctype="multipart/form-data">
+
 
 
         <label>Order ID</label>
@@ -208,7 +211,7 @@
         <label>Correo electrónico</label>
         <input type="email" name="email" required>
          
-        <label>Cantidad</label>
+        <label>Cantidad de tickets</label>
         <input type="text" id="formCant" name="Tickets" readonly>
 
         <label>Total USD</label>
@@ -224,7 +227,7 @@
         <input type="text" name="Referencia" required>
 
         <label>Comprobante del pago (se enviará por WhatsApp o email)</label>
-        <input type="file" accept="image/*">
+        <input type="file" name="Comprobante" accept="image/*" required>
 
         <label>Mensaje /opcional/</label>
         <textarea name="Mensaje" rows="3"></textarea>
