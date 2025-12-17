@@ -217,32 +217,19 @@
         <label>Método de Pago</label>
         <input type="text" id="formMetodo" name="Metodo" readonly>
 
-        <label>Número de Referencia</label>
+        <label>Número de referencia del pago</label>
         <input type="text" name="Referencia" required>
 
-        <label>Comprobante</label>
-        <input type="file" name="Comprobante" accept="image/*" required>
+        <label>Comprobante del pago (se enviará por WhatsApp o email)</label>
+        <input type="file" accept="image/*">
 
-        <label>Mensaje opcional</label>
+        <label>Mensaje /opcional/</label>
         <textarea name="Mensaje" rows="3"></textarea>
 
         <button class="btn" type="submit">CONFIRMAR COMPRA</button>
-
-        <input type="hidden" name="_subject" value="Nueva orden recibida - Super Sorteos">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_autoresponse" 
-            value="Gracias por tu orden en Super Sorteos.
-
-            Hemos recibido correctamente tu solicitud de compra.
-
-            En las próximas horas verificaremos el pago y te enviaremos la confirmación de tus números.
-
-            Por favor conserva tu Order ID para cualquier consulta.
-
-            Equipo Super Sorteos.">
        
         <input type="hidden" name="_next" value="https://antoniojoceve.github.io/app-supersorteos/gracias.html">
+    
     </form>
 </div>
 

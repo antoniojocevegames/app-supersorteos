@@ -166,7 +166,6 @@ document.getElementById("orderForm").addEventListener("submit", function(e){
         telefono: this.Telefono.value,
         email: this.email.value,
         metodo: method,
-        numeros: buildNumbersDisplay(),
         tickets: count,
         totalUSD: count * PRICE_USD,
         totalBS: count * RATE_BS,
