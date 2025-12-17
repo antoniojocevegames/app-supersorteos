@@ -189,31 +189,3 @@ document.getElementById("orderForm").addEventListener("submit", function(e){
     })
     .catch(() => alert("Error de conexión"));
 });
-
-function doPost(e) {
-  const data = JSON.parse(e.postData.contents);
-
-  const sheet = SpreadsheetApp
-    .openById("TU_SPREADSHEET_ID")
-    .getSheets()[0];
-
-  sheet.appendRow([
-    new Date(),
-    data.orderID,
-    data.nombre,
-    data.telefono,
-    data.email,
-    data.metodo,
-    data.tickets,
-    data.totalUSD,
-    data.totalBS,
-    data.referencia,
-    data.mensaje
-  ]);
-
-  return ContentService
-    .createTextOutput(JSON.stringify({ success: true }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-
