@@ -154,3 +154,20 @@ function generateOrderID(){
 
     return `${prefix}-${y}${m}${d}-${rnd}`;
 }
+
+// -----CONVERSOR DE LA IMAGEN DEL COMPROBANTE A BASE64
+
+const fileInput = document.getElementById("Comprobante");
+const base64Input = document.getElementById("ComprobanteBase64");
+
+fileInput.addEventListener("change", () => {
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function () {
+    // quitar: data:image/jpeg;base64,
+    base64Input.value = reader.result.split(",")[1];
+  };
+  reader.readAsDataURL(file);
+});
