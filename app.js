@@ -155,7 +155,7 @@ function generateOrderID(){
     return `${prefix}-${y}${m}${d}-${rnd}`;
 }
 
-const SHEET_URL = "https://script.google.com/macros/s/AKfycby7Zbm8FakBsSJQKpf78ymIJIsMKPsHAIIByMxLqWeyLN_lUbz0nH4uSqjQQE6Oeor7Ow/exec";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbxDDcF2usj59c-rg0OzXa6V99n4Oh_hEQvhcv2skgphMxt9_95EMtB1942aqgNAf5XoyQ/exec";
 
 document.getElementById("orderForm").addEventListener("submit", function(e){
     e.preventDefault();
