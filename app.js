@@ -179,11 +179,45 @@ const form = document.getElementById("orderForm");
 const submitBtn = document.getElementById("submitBtn");
 const loader = document.getElementById("loader");
 
-form.addEventListener("submit", () => {
+form.addEventListener("submit", function (e) {
+  e.preventDefault(); // ⛔ evita submit normal
+
   submitBtn.disabled = true;
   submitBtn.innerText = "ENVIANDO...";
   submitBtn.style.opacity = "0.6";
   submitBtn.style.pointerEvents = "none";
 
   if (loader) loader.style.display = "block";
+
+  // 📦 construir FormData
+  const formData = new FormData(form);
+
+  // 🔑 flag para el backend
+  formData.append("source", "client");
+
+  fetch(form.action, {
+    method: "POST",
+    body: formData
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        // 👉 REDIRECCIÓN AQUÍ (FRONTEND)
+        window.location.href =
+          `gracias.html?pdf=${encodeURIComponent(data.pdf)}`;
+      } else {
+        throw new Error("Respuesta inválida");
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      alert("Error enviando la orden. Intente nuevamente.");
+
+      // 🔄 reactivar botón si falla
+      submitBtn.disabled = false;
+      submitBtn.innerText = "COMPRAR";
+      submitBtn.style.opacity = "1";
+      submitBtn.style.pointerEvents = "auto";
+      if (loader) loader.style.display = "none";
+    });
 });
