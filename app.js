@@ -172,3 +172,18 @@ fileInput.addEventListener("change", () => {
 
   reader.readAsDataURL(file);
 });
+
+// BLOQUEAR BOTON DE COMPRA CONTRA SPAM
+
+const form = document.getElementById("orderForm");
+const submitBtn = document.getElementById("submitBtn");
+const loader = document.getElementById("loader");
+
+form.addEventListener("submit", () => {
+  submitBtn.disabled = true;
+  submitBtn.innerText = "ENVIANDO...";
+  submitBtn.style.opacity = "0.6";
+  submitBtn.style.pointerEvents = "none";
+
+  if (loader) loader.style.display = "block";
+});
