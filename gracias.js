@@ -1,19 +1,24 @@
-document.addEventListener("DOMContentLoaded", () => {
-
+window.onload = () => {
   const params = new URLSearchParams(window.location.search);
   const pdfUrl = params.get("pdf");
 
+  console.log("PDF URL:", pdfUrl);
+
   const btn = document.getElementById("btnPdf");
 
-  if (!pdfUrl) {
-    console.warn("No se recibió PDF");
+  if (!btn) {
+    console.error("❌ Botón btnPdf no existe en el DOM");
     return;
   }
 
-  btn.style.display = "block";
+  if (!pdfUrl) {
+    console.warn("⚠️ No llegó la URL del PDF");
+    return;
+  }
 
-  btn.addEventListener("click", () => {
-    window.open(pdfUrl, "_blank");
-  });
+  btn.style.display = "inline-block";
 
-});
+  btn.onclick = () => {
+    window.open(decodeURIComponent(pdfUrl), "_blank");
+  };
+};
