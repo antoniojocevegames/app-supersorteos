@@ -343,4 +343,54 @@ input[readonly] {
     background: #FBEAEA;
 }
 
+@media (max-width: 430px) {
+
+  .screen {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .btn {
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  .payIcon {
+    width: 46px;
+    height: 46px;
+    font-size: 20px;
+  }
+
+  .counterNum {
+    font-size: 34px;
+    width: 60px;
+  }
+
+  .counterBtn,
+  .resetBtn {
+    width: 44px;
+    height: 44px;
+    font-size: 22px;
+  }
+
+  .factLine {
+    font-size: 15px;
+  }
+
+  .back {
+    top: 8px;
+    left: 8px;
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+}
+
 </style>
