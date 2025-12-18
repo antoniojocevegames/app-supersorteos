@@ -1,31 +1,23 @@
-const { jsPDF } = window.jspdf;
+function descargarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
 
-// Recuperar datos
-const orderID = localStorage.getItem("orderID");
-const metodo  = localStorage.getItem("metodo");
-const total   = localStorage.getItem("total");
+  const orderID = localStorage.getItem("orderID");
+  const metodo  = localStorage.getItem("metodo");
+  const total   = localStorage.getItem("total");
+  const numeros = localStorage.getItem("numeros"); // ya asignados
 
-document.getElementById("order").innerText  = orderID || "-";
-document.getElementById("metodo").innerText = metodo || "-";
-document.getElementById("nums").innerText   = numeros || "-";
-document.getElementById("total").innerText  = total || "-";
+  doc.setFontSize(14);
+  doc.text("Super Sorteos - Comprobante", 20, 20);
 
-function generatePDF(){
-    const pdf = new jsPDF();
+  doc.setFontSize(11);
+  doc.text(`Order ID: ${orderID}`, 20, 40);
+  doc.text(`Método de pago: ${metodo}`, 20, 50);
+  doc.text(`Total: ${total}`, 20, 60);
+  doc.text(`Números asignados:`, 20, 75);
+  doc.text(numeros, 20, 85);
 
-    pdf.setFont("Helvetica", "bold");
-    pdf.setFontSize(18);
-    pdf.text("Super Sorteos", 20, 20);
+  doc.text("Estado: PENDIENTE DE VERIFICACIÓN", 20, 110);
 
-    pdf.setFontSize(12);
-    pdf.text(`Order ID: ${orderID}`, 20, 40);
-    pdf.text(`Método de pago: ${metodo}`, 20, 50);
-    pdf.text(`Total: ${total}`, 20, 70);
-
-    pdf.text("Gracias por tu compra.", 20, 95);
-
-    pdf.save(`Factura-${orderID}.pdf`);
+  doc.save(`SuperSorteos_${orderID}.pdf`);
 }
-
-localStorage.clear();
-

@@ -19,30 +19,27 @@
   <div class="screen active">
 
     <h1 class="title">¡GRACIAS!</h1>
-    <p class="subtitle">Tu orden fue recibida correctamente</p>
+    <h2>✅ Orden registrada</h2>
 
-    <div class="factura">
+    <p>
+    Tu pago ha sido recibido y está en proceso de verificación.
+    </p>
 
-      <div class="factLine">
-        <span>Order ID</span>
-        <span id="order"></span>
-      </div>
+    <p>
+    🕒 <strong>Tiempo estimado:</strong> entre 5 minutos y 2 horas.
+    </p>
 
-      <div class="factLine">
-        <span>Método de pago</span>
-        <span id="metodo"></span>
-      </div>
+    <p>
+    📧 Recibirás un correo automáticamente cuando tu pago sea confirmado
+    con tus números definitivos.
+    </p>
 
-      <div class="factLine">
-        <span>Total</span>
-        <span id="total"></span>
-      </div>
+    <p>
+    ⚠️ Por favor no intentes comprar nuevamente con el mismo comprobante.
+    </p>
 
-    </div>
 
-    <div class="btn" onclick="generatePDF()">
-      Descargar factura (PDF)
-    </div>
+    <button onclick="descargarPDF()">Descargar comprobante</button>
 
     <div class="btn" style="margin-top:15px;" onclick="window.location.href='index.html'">
       Volver al inicio
