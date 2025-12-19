@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Super Sorteos</title>
+
+<!-- FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&family=Monoton&display=swap" rel="stylesheet">
+
+<!-- CSS -->
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="app">
+
+<!-- =========================
+     PANTALLA 1 - TÉRMINOS
+========================= -->
+
+<div id="s1" class="screen active">
+    <h1 class="title">IMPORTANTE</h1>
+    <h2 class="subtitle">Leer antes de continuar</h2>
+
+    <div class="accordion" onclick="toggleTerms()">Mostrar Términos</div>
+
+    <div id="terms" class="panel">
+        <p><strong>1. COSTO Y PARTICIPACIÓN</strong></p>
+        <p><strong>1.1.</strong> Cada número tiene un valor de <strong>1 USD</strong>.</p>
+        <p><strong>1.2.</strong> La participación mínima por persona es de <strong>3 números</strong>.</p>
+        <p><strong>1.3.</strong> Una vez asignados los números, <strong>no se realizan reembolsos</strong> bajo ninguna circunstancia.</p>
+        <p><strong>2. PROCESO DE RESERVA Y ASIGNACIÓN</strong></p>
+        <p><strong>2.1.</strong> La reserva enviada mediante el formulario <strong>no garantiza</strong> la asignación inmediata del número.</p>
+        <p><strong>2.2.</strong> La asignación se realizará únicamente después de <strong>verificar el pago</strong> correspondiente.</p>
+        <p><strong>2.3.</strong> El participante podrá solicitar números específicos o permitir su asignación aleatoria.</p>
+        <p><strong>2.4.</strong> En caso de que un número solicitado ya esté ocupado, se asignará un número disponible equivalente o se ofrecerán alternativas.</p>
+        <p><strong>3. EXACTITUD DE LOS DATOS</strong></p>
+        <p><strong>3.1.</strong> El participante es responsable de proporcionar datos <strong>correctos y verificables</strong>.</p>
+        <p><strong>3.2.</strong> Errores en la información (correo, teléfono, referencia de pago, etc.) pueden retrasar o invalidar la reserva.</p>
+        <p><strong>3.3.</strong> La organización no se hace responsable por demoras ocasionadas por datos incorrectos o incompletos.</p>
+        <p><strong>4. DISPONIBILIDAD DE NÚMEROS</strong></p>
+        <p><strong>4.1.</strong> La disponibilidad de números está sujeta a cambios constantes según el orden de confirmación de pagos.</p>
+        <p><strong>4.2.</strong> Ver un número como “disponible” no garantiza su asignación.</p>
+        <p><strong>4.3.</strong> Los números se asignan bajo el principio de <strong>prioridad de pago confirmado</strong>.</p>
+        <p><strong>5. SOBRE EL SORTEO</strong></p>
+        <p><strong>5.1.</strong> El sorteo se realiza de manera semanal conforme a los resultados oficiales publicados.</p>
+        <p><strong>5.2.</strong> La organización de esta plataforma no altera ni interfiere en el sorteo oficial.</p>
+        <p><strong>5.3.</strong> La publicación de ganadores se realizará de forma transparente en los canales oficiales.</p>
+        <p><strong>6. ENTREGA DEL PREMIO</strong></p>
+        <p><strong>6.1.</strong> El premio será entregado únicamente mediante transferencia bancaria o método acordado.</p>
+        <p><strong>6.2.</strong> El ganador debe proporcionar datos verídicos y completos.</p>
+        <p><strong>6.3.</strong> Si el premio no es reclamado dentro del plazo indicado, podrá considerarse renunciado.</p>
+        <p><strong>7. PAGOS Y VALIDACIÓN</strong></p>
+        <p><strong>7.1.</strong> Solo se procesarán reservas con comprobante de pago válido.</p>
+        <p><strong>7.2.</strong> Si el monto no coincide con la reserva, el proceso quedará suspendido.</p>
+        <p><strong>7.3.</strong> El tiempo de validación puede variar según el método de pago.</p>
+        <p><strong>8. RESPONSABILIDAD DEL PARTICIPANTE</strong></p>
+        <p><strong>8.1.</strong> Al enviar una reserva, el participante acepta plenamente estos términos.</p>
+        <p><strong>8.2.</strong> Es responsabilidad del participante mantener comunicación activa.</p>
+        <p><strong>8.3.</strong> Cualquier intento de fraude anulará la participación.</p>
+        <p><strong>9. PRIVACIDAD DE DATOS</strong></p>
+        <p><strong>9.1.</strong> Los datos se utilizarán únicamente para la gestión del sorteo.</p>
+        <p><strong>9.2.</strong> No se compartirán datos con terceros salvo requerimiento legal.</p>
+        <p><strong>9.3.</strong> El participante puede solicitar la eliminación de sus datos al finalizar el sorteo.</p>
+        <p><strong>10. MODIFICACIONES</strong></p>
+        <p><strong>10.1.</strong> La organización se reserva el derecho de modificar estos términos.</p>
+        <p><strong>10.2.</strong> Las modificaciones serán publicadas en la página oficial.</p>
+        <p><strong>10.3.</strong> El uso continuado de la plataforma implica aceptación de los cambios.</p>
+
+    </div>
+
+    <div class="terms-check">
+        <input type="checkbox" id="chkT" onclick="validateTerms()">
+        <label for="chkT">He leído y acepto los términos y condiciones</label>
+    </div>
+    
+
+    <div id="btn1" class="btn disabled">ACEPTAR Y CONTINUAR</div>
+</div>
+
+<!-- =========================
+     PANTALLA 2 - CONTADOR
+========================= -->
+
+<div id="s2" class="screen">
+    <div class="back" onclick="go(1)">← Volver</div>
+
+    <h1 class="title">Asignación de números</h1>
+    <p class="subtitle">Elige la cantidad de tickets que deseas</p>
+
+    <div class="counterRow">
+        <div class="resetBtn" onclick="resetCount()">⟳</div>
+        <div class="counterBtn" onclick="subtract()">−</div>
+        <div class="counterNum" id="count">3</div>
+        <div class="counterBtn" onclick="add()">+</div>
+    </div>
+     
+    <h2 class="subtitle" id="totals"></h2>
+
+    <div class="btn" onclick="go(3)">ESCOGER MÉTODO DE PAGO</div>
+</div>
+
+<!-- =========================
+     PANTALLA 3 - MÉTODO DE PAGO
+========================= -->
+
+<div id="s3" class="screen">
+    <div class="back" onclick="go(2)">← Volver</div>
+
+    <h1 class="title">Método de Pago</h1>
+
+    <div id="pagoM" class="payCard" onclick="selectPay('Pago Móvil','pagoM')">
+        <div class="payIcon">P</div>
+        <div>
+            <b>Pago Móvil</b><br>
+            0102<br>
+            04121865493<br>
+            8434806
+        </div>
+    </div>
+
+    <div id="zelle" class="payCard" onclick="selectPay('Zelle','zelle')">
+        <div class="payIcon">Z</div>
+        <div>
+            <b>Zelle</b><br>
+            9296030084
+        </div>
+    </div>
+
+    <div id="binance" class="payCard" onclick="selectPay('Binance','binance')">
+        <div class="payIcon">B</div>
+        <div>
+            <b>Binance Pay</b><br>
+            antonyceden@gmail.com
+        </div>
+    </div>
+
+    <div id="paypal" class="payCard" onclick="selectPay('PayPal','paypal')">
+        <div class="payIcon">PP</div>
+        <div>
+            <b>PayPal</b><br>
+            luisdioanacordovagomez@gmail.com
+        </div>
+    </div>
+
+    <!-- ✅ CASH APP (ESTA ES LA QUE NO APARECÍA) -->
+    <div id="cashapp" class="payCard" onclick="selectPay('Cash App','cashapp')">
+        <div class="payIcon">C</div>
+        <div>
+            <b>Cash App</b><br>
+            luisdioanacordovagomez@gmail.com
+        </div>
+    </div>
+
+    <div class="copyBtn" onclick="copyData()">COPIAR DATOS</div>
+
+    <h2 class="subtitle" id="payTotals"></h2>
+
+    <div class="btn" onclick="validatePay()">CONTINUAR</div>
+</div>
+
+<!-- =========================
+     PANTALLA 4 - RESUMEN
+========================= -->
+
+<div id="s4" class="screen">
+    <div class="back" onclick="go(3)">← Volver</div>
+
+    <h1 class="title">Resumen</h1>
+
+    <div class="factura">
+        <div class="factLine"><span>Order ID:</span><span id="rOrder"></span></div>
+        <div class="factLine"><span>Método:</span><span id="rMetodo"></span></div>
+        <div class="factLine"><span>Tickets:</span><span id="rCant"></span></div>
+        <div class="factLine"><span>Total USD:</span><span id="rUsd"></span></div>
+        <div class="factLine"><span>Total Bs:</span><span id="rBs"></span></div>
+    </div>
+
+    <div class="btn" onclick="fillFormData(); go(5)">CONTINUAR</div>
+</div>
+
+<!-- =========================
+     PANTALLA 5 - FORMULARIO
+========================= -->
+
+<div id="s5" class="screen">
+    <div class="back" onclick="go(4)">← Volver</div>
+
+    <h1 class="title">Confirmar Pago</h1>
+
+    <form 
+    id="orderForm"
+    action="https://script.google.com/macros/s/AKfycbwoVVmn-SUwlA3ySzu4XILTyxXGkTo52xeVEmsw4F4p1H8rcoFBMa6L-xmCoCuzTDQg/exec"
+    method="POST"
+    enctype="multipart/form-data">
+
+
+
+        <label>Order ID</label>
+        <input type="text" id="formOrder" name="Order_ID" readonly>
+
+        <label>Nombre completo</label>
+        <input type="text" name="Nombre" required>
+
+        <label>Teléfono</label>
+        <input type="text" name="Telefono" required>
+
+        <label>Correo electrónico</label>
+        <input type="email" name="email" required>
+         
+        <label>Cantidad de tickets</label>
+        <input type="text" id="formCant" name="Tickets" readonly>
+
+        <label>Total USD</label>
+        <input type="text" id="formUsd" name="Total_USD" readonly>
+
+        <label>Total Bs</label>
+        <input type="text" id="formBs" name="Total_BS" readonly>
+
+        <label>Método de Pago</label>
+        <input type="text" id="formMetodo" name="Metodo" readonly>
+
+        <label>Número de referencia del pago</label>
+        <input type="text" name="Referencia" required>
+
+        <label>Comprobante del pago (se enviará por WhatsApp o email)</label>
+        <input type="file" id="Comprobante" name="Comprobante" accept="image/*" required>
+        <input type="hidden" name="ComprobanteBase64" id="ComprobanteBase64">
+
+        <label>Mensaje /opcional/</label>
+        <textarea name="Mensaje" rows="3"></textarea>
+
+        <button class="btn" type="submit" id="submitBtn">
+        CONFIRMAR COMPRA
+        </button>
+
+        <div id="loader" style="display:none;margin-top:10px">
+        Procesando tu compra…
+        </div>
+
+    </form>
+</div>
+
+</div>
+
+<!-- JS -->
+<script src="app.js" defer></script>
+
+</body>
+</html>
