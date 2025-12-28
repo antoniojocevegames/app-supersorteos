@@ -3,7 +3,7 @@ let method = "";
 let copyTxt = "";
 let orderID = "";
 const PRICE_USD = 1;
-const RATE_BS = 320; // ⬅️ SOLO CAMBIAS ESTO CADA SEMANA
+const RATE_BS = 350; // ⬅️ SOLO CAMBIAS ESTO CADA SEMANA
 
 const paymentMethods = {
     "Pago Móvil": {
