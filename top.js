@@ -1,10 +1,11 @@
-console.log("TOP.JS CARGADO");
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbzLz5X6sz-7v41YK-aNnl1mnBrZbUUM121uqFNNWjOPpqV09L_r_EropNCEYhdULzKplw/exec?action=top&callback=renderTop";
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzLz5X6sz-7v41YK-aNnl1mnBrZbUUM121uqFNNWjOPpqV09L_r_EropNCEYhdULzKplw/exec?action=top";
-
-function renderTop(lista) {
+function renderTop(data) {
   const body = document.getElementById("topBody");
   body.innerHTML = "";
+
+  const lista = Array.isArray(data) ? data : data.usuarios;
 
   if (!lista || !lista.length) {
     body.innerHTML = "<tr><td colspan='3'>Sin datos</td></tr>";
@@ -13,31 +14,31 @@ function renderTop(lista) {
 
   lista
     .sort((a, b) => b.tickets - a.tickets)
-    .slice(0, 5) // 🏆 TOP 5 REAL
+    .slice(0, 5) // 🏆 TOP 5
     .forEach((u, i) => {
-      const nombreAnonimo = u.nombre.split(" ")[0] + " ⭐";
-
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td class="rank">${i + 1}</td>
-        <td>${nombreAnonimo}</td>
+        <td>${u.nombre.split(" ")[0]} ⭐</td>
         <td>${u.tickets}</td>
       `;
       body.appendChild(tr);
     });
 }
 
-fetch(API_URL)
-  .then(r => r.json())
-  .then(data => {
-    const lista = Array.isArray(data) ? data : data.usuarios;
-    renderTop(lista);
-  })
-  .catch(err => {
-    console.error(err);
-    document.getElementById("topBody").innerHTML =
-      "<tr><td colspan='3'>Error cargando ranking</td></tr>";
-  });
+// 🔄 REFRESH SIN RECARGAR
+function refreshTop() {
+  const oldScript = document.getElementById("jsonpTop");
+  if (oldScript) oldScript.remove();
 
-// 🔁 auto refresco
-setInterval(() => location.reload(), 30000);
+  const script = document.createElement("script");
+  script.id = "jsonpTop";
+  script.src = API_URL + "&_ts=" + Date.now(); // evita cache
+  document.body.appendChild(script);
+}
+
+// ⏱ Primera carga
+refreshTop();
+
+// 🔁 Cada 30 segundos
+setInterval(refreshTop, 30000);
