@@ -1,25 +1,22 @@
 console.log("TOP.JS CARGADO");
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbzLz5X6sz-7v41YK-aNnl1mnBrZbUUM121uqFNNWjOPpqV09L_r_EropNCEYhdULzKplw/exec?action=top&callback=renderTop";
+  "https://script.google.com/macros/s/AKfycbzLz5X6sz-7v41YK-aNnl1mnBrZbUUM121uqFNNWjOPpqV09L_r_EropNCEYhdULzKplw/exec?action=top";
 
-// 👉 JSONP callback (DEBE ser global)
-window.renderTop = function (data) {
+function renderTop(lista) {
   const body = document.getElementById("topBody");
   if (!body) return;
 
   body.innerHTML = "";
 
-  const lista = Array.isArray(data) ? data : data.usuarios;
-
-  if (!lista || !lista.length) {
+  if (!Array.isArray(lista) || !lista.length) {
     body.innerHTML = "<tr><td colspan='3'>Sin datos</td></tr>";
     return;
   }
 
   lista
     .sort((a, b) => b.tickets - a.tickets)
-    .slice(0, 5) // 🏆 TOP 5
+    .slice(0, 5)
     .forEach((u, i) => {
       body.innerHTML += `
         <tr>
@@ -29,20 +26,19 @@ window.renderTop = function (data) {
         </tr>
       `;
     });
-};
-
-// 🔄 Carga / refresco JSONP
-function refreshTop() {
-  const old = document.getElementById("jsonpTop");
-  if (old) old.remove();
-
-  const s = document.createElement("script");
-  s.id = "jsonpTop";
-  s.src = API_URL + "&_ts=" + Date.now(); // evita cache
-  document.body.appendChild(s);
 }
 
-// ⏱ Arranque seguro (DOM listo)
+function refreshTop() {
+  fetch(API_URL + "&_ts=" + Date.now())
+    .then(r => r.json())
+    .then(renderTop)
+    .catch(err => {
+      console.error(err);
+      document.getElementById("topBody").innerHTML =
+        "<tr><td colspan='3'>Error cargando datos</td></tr>";
+    });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   refreshTop();
   setInterval(refreshTop, 30000);
