@@ -1,4 +1,4 @@
-fetch("https://script.google.com/macros/s/TU_SCRIPT_ID/exec?action=topUsuarios")
+fetch("https://script.google.com/macros/s/1EuaGRD1aZh9QSQM4D-tzWEFkG3EZgCTBKWyoCmCtlgpE9p3GOrv0XhWx/exec?action=topUsuarios")
   .then(r => r.json())
   .then(data => {
     const tbody = document.querySelector("#topTable tbody");
