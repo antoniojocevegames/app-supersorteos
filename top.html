@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Top compradores</title>
-<link rel="stylesheet" href="top.css">
+  <link rel="stylesheet" href="top.css">
 </head>
 
 <body>
@@ -22,6 +22,12 @@
       <tr><td colspan="3">Cargando…</td></tr>
     </tbody>
   </table>
-  <script src="top.js" defer></script>
+
+  <!-- JS principal -->
+  <script src="top.js"></script>
+
+  <!-- JSONP (ESTO ES CLAVE) -->
+  <script src="https://script.google.com/macros/s/AKfycbzLz5X6sz-7v41YK-aNnl1mnBrZbUUM121uqFNNWjOPpqV09L_r_EropNCEYhdULzKplw/exec?action=top&callback=renderTop"></script>
+
 </body>
 </html>
