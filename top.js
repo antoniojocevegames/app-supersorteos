@@ -1,11 +1,8 @@
-window.renderTop = renderTop;
-console.log("renderTop cargado");
+const API_URL = "https://script.google.com/macros/s/AKfycbzLz5X6sz-7v41YK-aNnl1mnBrZbUUM121uqFNNWjOPpqV09L_r_EropNCEYhdULzKplw/exec?action=top";
 
-function renderTop(data) {
+function renderTop(lista) {
   const body = document.getElementById("topBody");
   body.innerHTML = "";
-
-  const lista = Array.isArray(data) ? data : data.usuarios;
 
   if (!lista || !lista.length) {
     body.innerHTML = "<tr><td colspan='3'>Sin datos</td></tr>";
@@ -14,7 +11,7 @@ function renderTop(data) {
 
   lista
     .sort((a, b) => b.tickets - a.tickets)
-    .slice(0, 5)
+    .slice(0, 5) // 🏆 TOP 5 REAL
     .forEach((u, i) => {
       const nombreAnonimo = u.nombre.split(" ")[0] + " ⭐";
 
@@ -28,6 +25,17 @@ function renderTop(data) {
     });
 }
 
+fetch(API_URL)
+  .then(r => r.json())
+  .then(data => {
+    const lista = Array.isArray(data) ? data : data.usuarios;
+    renderTop(lista);
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("topBody").innerHTML =
+      "<tr><td colspan='3'>Error cargando ranking</td></tr>";
+  });
 
-// 🔁 Auto refresco cada 30s
+// 🔁 auto refresco
 setInterval(() => location.reload(), 30000);
