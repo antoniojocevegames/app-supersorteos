@@ -2,7 +2,7 @@ let count = 3;
 let method = "";
 let copyTxt = "";
 let orderID = "";
-const PRICE_USD = 1;
+const PRICE_USD = 1.5;
 const RATE_BS = 630; // ⬅️ SOLO CAMBIAS ESTO CADA SEMANA
 
 const paymentMethods = {
@@ -240,4 +240,5 @@ form.addEventListener("submit", function (e) {
 });
 
 document.addEventListener("DOMContentLoaded", updateTotals);
+
 
